@@ -12,7 +12,6 @@ enum NetworkError: Error {
     case badResponse
 }
 
-@MainActor
 struct FetchService {
     
     private let baseURL = "https://api.coinpaprika.com/v1/tickers"
