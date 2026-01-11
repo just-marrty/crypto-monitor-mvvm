@@ -42,7 +42,6 @@ The project demonstrates modern SwiftUI patterns and MVVM architecture:
 - Fetches data from CoinPaprika API tickers endpoint
 - Uses JSONDecoder with convertFromSnakeCase strategy for automatic key conversion
 - Returns array of Cryptocurrency objects
-- @MainActor for thread-safe operations
 
 ### ViewModel
 
