@@ -29,7 +29,7 @@ class CryptocurrencyListViewModel {
             let cryptocurrencies = try await fetchService.fetchCryptocurrency()
             self.cryptocurrencies = cryptocurrencies.map(CryptocurrencyViewModel.init)
         } catch {
-            errorMessage = "Cannot load the JSON data: \(error)"
+            errorMessage = "There seems to be a problem on providers side."
         }
         
         isLoading = false
@@ -86,15 +86,15 @@ struct CryptocurrencyViewModel: Identifiable, Hashable {
         cryptocurrency.maxSupply
     }
     
-    var firstDateAt: String {
-        cryptocurrency.firstDateAt ?? "N/A"
+    var firstDataAt: String {
+        cryptocurrency.firstDataAt ?? "N/A"
     }
     
     var lastUpdated: String {
         cryptocurrency.lastUpdated
     }
     
-    var usdPrice: Double {
-        cryptocurrency.quotes["USD"]?.price ?? 0.0
+    var usdPrice: Decimal {
+        cryptocurrency.quotes.USD.price
     }
 }

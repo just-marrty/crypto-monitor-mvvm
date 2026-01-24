@@ -14,11 +14,15 @@ struct Cryptocurrency: Decodable, Hashable {
     let rank: Int
     let totalSupply: Double
     let maxSupply: Double
-    let firstDateAt: String?
+    let firstDataAt: String?
     let lastUpdated: String
-    let quotes: [String: Quote]
+    let quotes: Quote
     
     struct Quote: Decodable, Hashable {
-        let price: Double
+        let USD: USD
+        
+        struct USD: Decodable, Hashable {
+            let price: Decimal
+        }
     }
 }

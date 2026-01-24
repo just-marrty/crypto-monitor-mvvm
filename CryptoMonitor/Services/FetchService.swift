@@ -14,10 +14,12 @@ enum NetworkError: Error {
 
 struct FetchService {
     
-    private let baseURL = "https://api.coinpaprika.com/v1/tickers"
+    private let endpoints = "/tickers"
+    
+    private let baseURL = "https://api.coinpaprika.com/v1"
     
     func fetchCryptocurrency() async throws -> [Cryptocurrency] {
-        guard let url = URL(string: baseURL) else {
+        guard let url = URL(string: baseURL+endpoints) else {
             throw NetworkError.invalidURL
         }
         

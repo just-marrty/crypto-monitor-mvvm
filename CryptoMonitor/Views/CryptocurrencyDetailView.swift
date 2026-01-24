@@ -9,8 +9,6 @@ import SwiftUI
 
 struct CryptocurrencyDetailView: View {
     
-    @AppStorage("isDarkOn") private var isDarkOn: Bool = false
-    
     @Environment(\.dismiss) private var dismiss
     
     let cryptocurrency: CryptocurrencyViewModel
@@ -20,14 +18,14 @@ struct CryptocurrencyDetailView: View {
             VStack(alignment: .leading) {
                 VStack {
                     Text("Basic information")
-                        .font(.system(size: 25))
+                        .font(.system(size: 25, design: .rounded))
                         .bold()
                 }
                 .padding()
                 
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Name:")
-                        .font(.system(size: 18))
+                        .font(.system(size: 18, design: .rounded))
                         .bold()
                     Text(cryptocurrency.name)
                 }
@@ -37,7 +35,7 @@ struct CryptocurrencyDetailView: View {
                 
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Symbol:")
-                        .font(.system(size: 18))
+                        .font(.system(size: 18, design: .rounded))
                         .bold()
                     Text(cryptocurrency.symbol)
                 }
@@ -47,9 +45,9 @@ struct CryptocurrencyDetailView: View {
                 
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Price:")
-                        .font(.system(size: 18))
+                        .font(.system(size: 18, design: .rounded))
                         .bold()
-                    Text("\(cryptocurrency.usdPrice) USD")
+                    Text(cryptocurrency.usdPrice.formatted(.currency(code: "USD").presentation(.isoCode)))
                 }
                 .padding(.horizontal)
                 
@@ -57,7 +55,7 @@ struct CryptocurrencyDetailView: View {
                 
                 VStack(alignment: .leading, spacing: 4) {
                     Text("id:")
-                        .font(.system(size: 18))
+                        .font(.system(size: 18, design: .rounded))
                         .bold()
                     Text(cryptocurrency.id)
                 }
@@ -67,7 +65,7 @@ struct CryptocurrencyDetailView: View {
                 
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Rank:")
-                        .font(.system(size: 18))
+                        .font(.system(size: 18, design: .rounded))
                         .bold()
                     Text("\(cryptocurrency.rank)")
                 }
@@ -77,19 +75,30 @@ struct CryptocurrencyDetailView: View {
                 
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Total supply")
-                        .font(.system(size: 18))
+                        .font(.system(size: 18, design: .rounded))
                         .bold()
-                    Text("\(cryptocurrency.totalSupply)")
+                    Text("\(cryptocurrency.totalSupply.formatted())")
                 }
                 .padding(.horizontal)
                 
                 Divider()
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("First date at:")
-                        .font(.system(size: 18))
+                    Text("Max supply")
+                        .font(.system(size: 18, design: .rounded))
                         .bold()
-                    Text(cryptocurrency.firstDateAt)
+                    Text("\(cryptocurrency.maxSupply.formatted())")
+                }
+                .padding(.horizontal)
+                
+                Divider()
+
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("First data at:")
+                        .font(.system(size: 18, design: .rounded))
+                        .bold()
+                    Text(cryptocurrency.firstDataAt.formattedDateTime())
                 }
                 .padding(.horizontal)
                 
@@ -97,28 +106,28 @@ struct CryptocurrencyDetailView: View {
                 
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Last updated:")
-                        .font(.system(size: 18))
+                        .font(.system(size: 18, design: .rounded))
                         .bold()
-                    Text(cryptocurrency.lastUpdated)
+                    Text(cryptocurrency.lastUpdated.formattedDateTime())
                 }
                 .padding(.horizontal)
             }
             .padding(.top, 25)
             .navigationTitle(cryptocurrency.name)
             .navigationBarTitleDisplayMode(.inline)
-            .toolbarBackgroundVisibility(.visible, for: .navigationBar)
-            .toolbarBackground(.header)
-            .navigationBarBackButtonHidden(true)
-        }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "chevron.left")
-                    Text("Back")
+            .navigationBarBackButtonHidden()
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 18, design: .rounded))
+                            .bold()
+                    }
                 }
             }
+            .tint(.header)
         }
     }
 }
@@ -126,5 +135,6 @@ struct CryptocurrencyDetailView: View {
 #Preview {
     NavigationStack {
         CryptocurrencyDetailView(cryptocurrency: .sampleCryptocurrencyDetailView)
+            .preferredColorScheme(.dark)
     }
 }

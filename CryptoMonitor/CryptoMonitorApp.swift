@@ -11,7 +11,8 @@ import SwiftUI
 struct CryptoMonitorApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CryptoccurencyMainView()
+                .preferredColorScheme(.dark)
         }
     }
 }
