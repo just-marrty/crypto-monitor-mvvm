@@ -18,14 +18,14 @@ struct CryptoccurencyMainView: View {
         NavigationStack {
             VStack {
                 if vm.isLoading {
-                    ProgressView("Loading...")
+                    ProgressView(StringConstants.loading)
                 } else if let errorMessage = vm.errorMessage {
                     VStack {
-                        Image(systemName: "exclamationmark.triangle")
+                        Image(systemName: StringConstants.exclamationMarkTriangle)
                             .foregroundStyle(.orange)
                             .bold()
                             .font(.system(size: 28, design: .rounded))
-                        Text("Oups")
+                        Text(StringConstants.oups)
                             .font(.system(size: 26, design: .rounded))
                             .bold()
                             .padding(5)
@@ -39,11 +39,11 @@ struct CryptoccurencyMainView: View {
                             }
                         } label: {
                             VStack {
-                                Text("Try again")
+                                Text(StringConstants.tryAgain)
                                     .font(.system(size: 20, design: .rounded))
                                     .bold()
                                     .padding()
-                                Image(systemName: "arrow.clockwise")
+                                Image(systemName: StringConstants.arrowClockwise)
                                     .font(.system(size: 20, design: .rounded))
                                     .bold()
                             }
@@ -60,7 +60,7 @@ struct CryptoccurencyMainView: View {
                                     .bold()
                                 Spacer()
                                 
-                                Text(cryptocurrency.usdPrice.formatted(.currency(code: "USD").presentation(.isoCode)))
+                                Text(cryptocurrency.usdPrice.formatted(.currency(code: StringConstants.usd).presentation(.isoCode)))
                                     .font(.system(size: 16, design: .rounded))
                             }
                         }
@@ -68,7 +68,7 @@ struct CryptoccurencyMainView: View {
                     .navigationDestination(for: CryptocurrencyViewModel.self) { cryptocurrency in
                         CryptocurrencyDetailView(cryptocurrency: cryptocurrency)
                     }
-                    .searchable(text: $searchText, prompt: "Search cryptocurrency")
+                    .searchable(text: $searchText, prompt: StringConstants.searchCryptocurrency)
                     .animation(.default, value: searchText)
                     
                 }
@@ -80,7 +80,7 @@ struct CryptoccurencyMainView: View {
                             await vm.loadCryptocurrency()
                         }
                     } label: {
-                        Image(systemName: "arrow.clockwise")
+                        Image(systemName: StringConstants.arrowClockwise)
                             .font(.system(size: 18, design: .rounded))
                             .bold()
                     }
@@ -91,13 +91,13 @@ struct CryptoccurencyMainView: View {
                         rank.toggle()
                         vm.sort(by: rank)
                     } label: {
-                        Image(systemName: rank ? "arrow.down" : "arrow.up")
+                        Image(systemName: rank ? StringConstants.arrowDown : StringConstants.arrowUp)
                             .font(.system(size: 18, design: .rounded))
                             .bold()
                     }
                 }
             }
-            .navigationTitle("Cryptocurrencies")
+            .navigationTitle(StringConstants.cryptocurrencies)
             .tint(.header)
         }
         .task {

@@ -29,7 +29,7 @@ class CryptocurrencyListViewModel {
             let cryptocurrencies = try await fetchService.fetchCryptocurrency()
             self.cryptocurrencies = cryptocurrencies.map(CryptocurrencyViewModel.init)
         } catch {
-            errorMessage = "There seems to be a problem on providers side."
+            errorMessage = StringConstants.errorMessage
         }
         
         isLoading = false
