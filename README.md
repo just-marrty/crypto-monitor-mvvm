@@ -7,12 +7,12 @@ A SwiftUI application for browsing and exploring cryptocurrencies with detailed 
 - Browse a list of cryptocurrencies with their basic information (name, price)
 - Search functionality to filter cryptocurrencies by name
 - Real-time search filtering with smooth animations
-- Light and dark mode toggle with persistent preference
 - Rank sorting toggle (ascending/descending) for cryptocurrency list
 - Loading states and error handling with retry functionality
 - Clean and modern UI with SwiftUI
 - Detailed cryptocurrency view with comprehensive information
 - Refresh functionality to reload cryptocurrency data
+- Dark mode UI with custom color scheme
 
 ## Architecture
 
@@ -22,16 +22,16 @@ The project demonstrates modern SwiftUI patterns and MVVM architecture:
 
 **Cryptocurrency** - Decodable model representing cryptocurrency data from API
 - Includes id, name, symbol, rank, totalSupply, maxSupply
-- Contains firstDateAt and lastUpdated timestamps
-- Uses nested Quote struct for price information
+- Contains firstDataAt and lastUpdated timestamps
+- Uses nested Quote struct with USD price information
 - Maps JSON response with snake_case to camelCase conversion
-- All properties use appropriate types (String, Int, Double)
-- firstDateAt is optional to handle missing values gracefully
+- All properties use appropriate types (String, Int, Double, Decimal)
+- firstDataAt is optional to handle missing values gracefully
 - Conforms to Decodable and Hashable for JSON parsing and list operations
 
 **Quote** - Nested struct representing price quotes
-- Contains price information for different currencies
-- Stored in dictionary keyed by currency code (e.g., "USD")
+- Contains USD struct with price information
+- Price stored as Decimal for precise financial calculations
 - Conforms to Decodable and Hashable
 
 ### Service
@@ -57,30 +57,42 @@ The project demonstrates modern SwiftUI patterns and MVVM architecture:
 **CryptocurrencyViewModel** - Presentation model wrapping Cryptocurrency
 - Conforms to Identifiable and Hashable for SwiftUI list support
 - Provides computed properties for view display
-- Handles optional cryptocurrency properties with default values ("N/A" for strings, 0.0 for price)
+- Handles optional cryptocurrency properties with default values ("N/A" for strings)
 - Separates domain model from presentation concerns
-- Extracts USD price from quotes dictionary
+- Extracts USD price as Decimal type
 
 ### Views
 
-**ContentView** - Main container with searchable cryptocurrency list, dark mode toggle, and sorting
-- Uses @AppStorage for persistent dark mode preference
+**CryptoccurencyMainView** - Main container with searchable cryptocurrency list and sorting
 - Real-time search filtering with searchable modifier
 - NavigationStack for navigation
 - Loading, error, and content states with appropriate UI
-- Toolbar buttons for theme switching and rank sorting
+- Refresh button in top-right toolbar for reloading data
+- Sort button in top-left toolbar for rank sorting (ascending/descending)
 - Displays cryptocurrency name and USD price in list view
-- Refresh button in bottom toolbar
-- Custom header color with toolbarBackground modifier
+- Custom tint color using .header color asset
+- Fixed dark mode color scheme
 
 **CryptocurrencyDetailView** - Detailed view for individual cryptocurrency information
 - Scrollable detail view showing all cryptocurrency properties
-- Displays name, symbol, price, id, rank, total supply
-- Shows first date and last updated timestamps
+- Displays name, symbol, price, id, rank, total supply, max supply
+- Shows formatted first data at and last updated timestamps
 - Clean layout with dividers separating information sections
 - Navigation title with cryptocurrency name
 - Custom back button with dismiss functionality
 - Consistent header styling with main view
+
+### Extensions
+
+**DateTimeFormatter+Extensions** - Custom String extension for date formatting
+- Provides `formattedDateTime()` method for formatting ISO8601 date strings
+- Handles both standard and fractional seconds ISO8601 formats
+- Converts dates to abbreviated date and shortened time format
+- Falls back to original string if parsing fails
+
+**CryptocurrencyViewModel+Extensions** - Sample data for SwiftUI previews
+- Provides static sample cryptocurrency data for development and testing
+- Used in SwiftUI previews for CryptocurrencyDetailView
 
 ## Dependency Injection
 
@@ -88,13 +100,12 @@ The project uses constructor-based dependency injection:
 
 - CryptocurrencyListViewModel receives FetchService as a dependency through its initializer
 - This allows for easy testing and swapping implementations
-- FetchService is injected in ContentView when creating the ViewModel
+- FetchService is injected in CryptoccurencyMainView when creating the ViewModel
 - Promotes loose coupling and testability
 
 ## State Management
 
 - @State for local view state (search text, ViewModel instance, sorting toggle)
-- @AppStorage for persistent dark mode preference
 - @Observable macro for reactive ViewModel updates
 - Reactive filtering with searchable modifier and computed properties
 - State-based sorting with toggle mechanism
@@ -107,17 +118,18 @@ The project uses constructor-based dependency injection:
 - **NavigationStack** - Programmatic navigation
 - **JSON Decoding** - Custom Decodable implementation with automatic snake_case conversion
 - **Searchable** - Built-in search functionality with real-time filtering
-- **AppStorage** - Persistent user preferences for theme
 - **Observable** - Using @Observable macro for reactive UI updates
 - **Dependency Injection** - Constructor-based DI for testability and flexibility
 - **Animation** - Smooth transitions with default SwiftUI animations
 - **URLSession** - Modern async/await API for network requests
+- **Swift Extensions** - Custom extensions for date formatting and sample data
+- **Decimal** - Precise decimal type for financial calculations
 
 ## Requirements
 
-- iOS 17.0+
-- Xcode 15.0+
-- Swift 5.9+
+- iOS 18.0+
+- Xcode 18.0+
+- Swift 6+
 - Internet connection for API access
 
 ## Credits
