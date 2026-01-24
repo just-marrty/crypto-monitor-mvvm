@@ -34,6 +34,15 @@ The project demonstrates modern SwiftUI patterns and MVVM architecture:
 - Price stored as Decimal for precise financial calculations
 - Conforms to Decodable and Hashable
 
+### Constants
+**Constants** - Centralized string constants for maintainability and localization
+
+- Organizes all UI strings, error messages, and system image names in one place
+- Categorized sections: Error messages, UI labels, search placeholders, navigation titles, currency codes, system images
+- Improves code maintainability and makes future localization easier
+- Eliminates hardcoded strings throughout the codebase
+- Used across all views and view models for consistent text display
+
 ### Service
 
 **FetchService** - Fetches and decodes cryptocurrency data from CoinPaprika API
@@ -72,6 +81,8 @@ The project demonstrates modern SwiftUI patterns and MVVM architecture:
 - Displays cryptocurrency name and USD price in list view
 - Custom tint color using .header color asset
 - Fixed dark mode color scheme
+- Loading, error, and content states with appropriate UI using Constants for all text
+- All UI strings (loading, error messages, button labels) sourced from Constants
 
 **CryptocurrencyDetailView** - Detailed view for individual cryptocurrency information
 - Scrollable detail view showing all cryptocurrency properties
@@ -81,6 +92,7 @@ The project demonstrates modern SwiftUI patterns and MVVM architecture:
 - Navigation title with cryptocurrency name
 - Custom back button with dismiss functionality
 - Consistent header styling with main view
+- All labels and section headers use Constants for consistent text management
 
 ### Extensions
 
@@ -124,6 +136,7 @@ The project uses constructor-based dependency injection:
 - **URLSession** - Modern async/await API for network requests
 - **Swift Extensions** - Custom extensions for date formatting and sample data
 - **Decimal** - Precise decimal type for financial calculations
+- **Constants Pattern** - Centralized string management for maintainability
 
 ## Requirements
 
