@@ -15,9 +15,9 @@ class CryptocurrencyListViewModel {
     var isLoading = false
     var errorMessage: String?
     
-    private let fetchService: FetchService
+    private let fetchService: FetchServiceProtocol
     
-    init(fetchService: FetchService) {
+    init(fetchService: FetchServiceProtocol) {
         self.fetchService = fetchService
     }
     
@@ -93,7 +93,7 @@ struct CryptocurrencyViewModel: Identifiable, Hashable {
         cryptocurrency.lastUpdated
     }
     
-    var usdPrice: Decimal {
-        cryptocurrency.quotes.USD.price
+    var usdPrice: String {
+        cryptocurrency.quotes.USD.price.formatted(.currency(code: StringConstants.usd).presentation(.isoCode))
     }
 }

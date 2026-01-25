@@ -14,7 +14,7 @@ enum NetworkError: Error {
     case decodingFail
 }
 
-struct FetchService {
+struct FetchService: FetchServiceProtocol {
         
     func fetchCryptocurrency() async throws -> [Cryptocurrency] {
         guard let url = URL(string: APIConstants.baseURL+APIConstants.endpoints) else {

@@ -9,7 +9,11 @@ import SwiftUI
 
 struct CryptoccurencyMainView: View {
     
-    @State private var vm = CryptocurrencyListViewModel(fetchService: FetchService())
+    @State private var vm: CryptocurrencyListViewModel
+    
+    init(fetchService: FetchServiceProtocol = FetchService()) {
+        _vm = State(wrappedValue: CryptocurrencyListViewModel(fetchService: fetchService))
+    }
     
     @State private var searchText: String = ""
     @State private var rank: Bool = true
@@ -22,7 +26,7 @@ struct CryptoccurencyMainView: View {
                 } else if let errorMessage = vm.errorMessage {
                     VStack {
                         Image(systemName: StringConstants.exclamationMarkTriangle)
-                            .foregroundStyle(.orange)
+                            .foregroundStyle(.header)
                             .bold()
                             .font(.system(size: 28, design: .rounded))
                         Text(StringConstants.oups)
@@ -60,7 +64,7 @@ struct CryptoccurencyMainView: View {
                                     .bold()
                                 Spacer()
                                 
-                                Text(cryptocurrency.usdPrice.formatted(.currency(code: StringConstants.usd).presentation(.isoCode)))
+                                Text(cryptocurrency.usdPrice)
                                     .font(.system(size: 16, design: .rounded))
                             }
                         }
@@ -108,5 +112,37 @@ struct CryptoccurencyMainView: View {
 
 #Preview {
     CryptoccurencyMainView()
+        .preferredColorScheme(.dark)
+}
+
+#Preview("Mock Data") {
+    struct MockService: FetchServiceProtocol {
+        func fetchCryptocurrency() async throws -> [Cryptocurrency] {
+            return [
+                Cryptocurrency(
+                    id: "btc-bitcoin",
+                    name: "Bitcoin",
+                    symbol: "BTC",
+                    rank: 1,
+                    totalSupply: 19959250,
+                    maxSupply: 21000000,
+                    firstDataAt: "2010-07-17T00:00:00Z",
+                    lastUpdated: "2025-12-08T07:35:27Z",
+                    quotes: Cryptocurrency.Quote(USD: Cryptocurrency.Quote.USD(price: 91726.981996402))
+                )
+            ]
+        }
+    }
+    return CryptoccurencyMainView(fetchService: MockService())
+        .preferredColorScheme(.dark)
+}
+
+#Preview("Status Code Error") {
+    struct ErrorService: FetchServiceProtocol {
+        func fetchCryptocurrency() async throws -> [Cryptocurrency] {
+            throw NetworkError.httpError(404)
+        }
+    }
+    return CryptoccurencyMainView(fetchService: ErrorService())
         .preferredColorScheme(.dark)
 }

@@ -47,7 +47,7 @@ struct CryptocurrencyDetailView: View {
                     Text(StringConstants.price)
                         .font(.system(size: 18, design: .rounded))
                         .bold()
-                    Text(cryptocurrency.usdPrice.formatted(.currency(code: StringConstants.usd).presentation(.isoCode)))
+                    Text(cryptocurrency.usdPrice)
                 }
                 .padding(.horizontal)
                 
