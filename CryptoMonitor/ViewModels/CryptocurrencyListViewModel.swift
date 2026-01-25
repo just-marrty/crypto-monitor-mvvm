@@ -15,7 +15,7 @@ class CryptocurrencyListViewModel {
     var isLoading = false
     var errorMessage: String?
     
-    let fetchService: FetchService
+    private let fetchService: FetchService
     
     init(fetchService: FetchService) {
         self.fetchService = fetchService
@@ -31,7 +31,6 @@ class CryptocurrencyListViewModel {
         } catch {
             errorMessage = StringConstants.errorMessage
         }
-        
         isLoading = false
     }
     
