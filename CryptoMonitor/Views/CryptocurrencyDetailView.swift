@@ -17,14 +17,14 @@ struct CryptocurrencyDetailView: View {
         ScrollView {
             VStack(alignment: .leading) {
                 VStack {
-                    Text(StringConstants.basicInfo)
+                    Text(Strings.basicInfo)
                         .font(.system(size: 25, design: .rounded))
                         .bold()
                 }
                 .padding()
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(StringConstants.name)
+                    Text(Strings.name)
                         .font(.system(size: 18, design: .rounded))
                         .bold()
                     Text(cryptocurrency.name)
@@ -34,7 +34,7 @@ struct CryptocurrencyDetailView: View {
                 Divider()
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(StringConstants.symbol)
+                    Text(Strings.symbol)
                         .font(.system(size: 18, design: .rounded))
                         .bold()
                     Text(cryptocurrency.symbol)
@@ -44,7 +44,7 @@ struct CryptocurrencyDetailView: View {
                 Divider()
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(StringConstants.price)
+                    Text(Strings.price)
                         .font(.system(size: 18, design: .rounded))
                         .bold()
                     Text(cryptocurrency.usdPrice)
@@ -54,7 +54,7 @@ struct CryptocurrencyDetailView: View {
                 Divider()
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(StringConstants.id)
+                    Text(Strings.id)
                         .font(.system(size: 18, design: .rounded))
                         .bold()
                     Text(cryptocurrency.id)
@@ -64,7 +64,7 @@ struct CryptocurrencyDetailView: View {
                 Divider()
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(StringConstants.rank)
+                    Text(Strings.rank)
                         .font(.system(size: 18, design: .rounded))
                         .bold()
                     Text("\(cryptocurrency.rank)")
@@ -74,7 +74,7 @@ struct CryptocurrencyDetailView: View {
                 Divider()
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(StringConstants.totalSupply)
+                    Text(Strings.totalSupply)
                         .font(.system(size: 18, design: .rounded))
                         .bold()
                     Text("\(cryptocurrency.totalSupply.formatted())")
@@ -84,7 +84,7 @@ struct CryptocurrencyDetailView: View {
                 Divider()
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(StringConstants.maxSupply)
+                    Text(Strings.maxSupply)
                         .font(.system(size: 18, design: .rounded))
                         .bold()
                     Text("\(cryptocurrency.maxSupply.formatted())")
@@ -95,7 +95,7 @@ struct CryptocurrencyDetailView: View {
 
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(StringConstants.firstDataAt)
+                    Text(Strings.firstDataAt)
                         .font(.system(size: 18, design: .rounded))
                         .bold()
                     Text(cryptocurrency.firstDataAt.formattedDateTime())
@@ -105,7 +105,7 @@ struct CryptocurrencyDetailView: View {
                 Divider()
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(StringConstants.lastUpdated)
+                    Text(Strings.lastUpdated)
                         .font(.system(size: 18, design: .rounded))
                         .bold()
                     Text(cryptocurrency.lastUpdated.formattedDateTime())
@@ -121,7 +121,7 @@ struct CryptocurrencyDetailView: View {
                     Button {
                         dismiss()
                     } label: {
-                        Image(systemName: StringConstants.chevronLeft)
+                        Image(systemName: Strings.chevronLeft)
                             .font(.system(size: 18, design: .rounded))
                             .bold()
                     }

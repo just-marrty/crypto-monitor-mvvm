@@ -29,7 +29,7 @@ class CryptocurrencyListViewModel {
             let cryptocurrencies = try await fetchService.fetchCryptocurrency()
             self.cryptocurrencies = cryptocurrencies.map(CryptocurrencyViewModel.init)
         } catch {
-            errorMessage = StringConstants.errorMessage
+            errorMessage = Strings.errorMessage
         }
         isLoading = false
     }
@@ -94,6 +94,6 @@ struct CryptocurrencyViewModel: Identifiable, Hashable {
     }
     
     var usdPrice: String {
-        cryptocurrency.quotes.USD.price.formatted(.currency(code: StringConstants.usd).presentation(.isoCode))
+        cryptocurrency.quotes.USD.price.formatted(.currency(code: Strings.usd).presentation(.isoCode))
     }
 }

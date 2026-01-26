@@ -22,14 +22,14 @@ struct CryptoccurencyMainView: View {
         NavigationStack {
             VStack {
                 if vm.isLoading {
-                    ProgressView(StringConstants.loading)
+                    ProgressView(Strings.loading)
                 } else if let errorMessage = vm.errorMessage {
                     VStack {
-                        Image(systemName: StringConstants.exclamationMarkTriangle)
+                        Image(systemName: Strings.exclamationMarkTriangle)
                             .foregroundStyle(.header)
                             .bold()
                             .font(.system(size: 28, design: .rounded))
-                        Text(StringConstants.oups)
+                        Text(Strings.oups)
                             .font(.system(size: 26, design: .rounded))
                             .bold()
                             .padding(5)
@@ -43,11 +43,11 @@ struct CryptoccurencyMainView: View {
                             }
                         } label: {
                             VStack {
-                                Text(StringConstants.tryAgain)
+                                Text(Strings.tryAgain)
                                     .font(.system(size: 20, design: .rounded))
                                     .bold()
                                     .padding()
-                                Image(systemName: StringConstants.arrowClockwise)
+                                Image(systemName: Strings.arrowClockwise)
                                     .font(.system(size: 20, design: .rounded))
                                     .bold()
                             }
@@ -72,7 +72,7 @@ struct CryptoccurencyMainView: View {
                     .navigationDestination(for: CryptocurrencyViewModel.self) { cryptocurrency in
                         CryptocurrencyDetailView(cryptocurrency: cryptocurrency)
                     }
-                    .searchable(text: $searchText, prompt: StringConstants.searchCryptocurrency)
+                    .searchable(text: $searchText, prompt: Strings.searchCryptocurrency)
                     .animation(.default, value: searchText)
                     
                 }
@@ -84,7 +84,7 @@ struct CryptoccurencyMainView: View {
                             await vm.loadCryptocurrency()
                         }
                     } label: {
-                        Image(systemName: StringConstants.arrowClockwise)
+                        Image(systemName: Strings.arrowClockwise)
                             .font(.system(size: 18, design: .rounded))
                             .bold()
                     }
@@ -95,13 +95,13 @@ struct CryptoccurencyMainView: View {
                         rank.toggle()
                         vm.sort(by: rank)
                     } label: {
-                        Image(systemName: rank ? StringConstants.arrowDown : StringConstants.arrowUp)
+                        Image(systemName: rank ? Strings.arrowDown : Strings.arrowUp)
                             .font(.system(size: 18, design: .rounded))
                             .bold()
                     }
                 }
             }
-            .navigationTitle(StringConstants.cryptocurrencies)
+            .navigationTitle(Strings.cryptocurrencies)
             .tint(.header)
         }
         .task {

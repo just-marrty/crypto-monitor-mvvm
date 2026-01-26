@@ -17,7 +17,7 @@ enum NetworkError: Error {
 struct FetchService: FetchServiceProtocol {
         
     func fetchCryptocurrency() async throws -> [Cryptocurrency] {
-        guard let url = URL(string: APIConstants.baseURL+APIConstants.endpoints) else {
+        guard let url = URL(string: API.baseURL+API.Endpoints.tickers) else {
             print("Invalid URL")
             throw NetworkError.invalidURL
         }

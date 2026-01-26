@@ -7,7 +7,10 @@
 
 import Foundation
 
-struct APIConstants {
+enum API {
     static let baseURL = "https://api.coinpaprika.com/v1"
-    static let endpoints = "/tickers"
+    
+    enum Endpoints {
+        static let tickers = "/tickers"
+    }
 }
