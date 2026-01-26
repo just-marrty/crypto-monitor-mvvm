@@ -1,5 +1,5 @@
 //
-//  StringConstants.swift
+//  Strings.swift
 //  CryptoMonitor
 //
 //  Created by Martin Hrbáček on 24.01.2026.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct StringConstants {
+struct Strings {
     // MARK: - Error Message
     static let errorMessage = "There seems to be a problem on providers side."
     
