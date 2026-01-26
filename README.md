@@ -59,7 +59,6 @@ The project demonstrates modern SwiftUI patterns and MVVM architecture with prot
 
 - Stores base URL and endpoint paths
 - Separates network configuration from business logic
-- Enables easy switching between different API environments
 - Single source of truth for API endpoints
 
 ### Service
