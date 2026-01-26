@@ -47,7 +47,7 @@ The project demonstrates modern SwiftUI patterns and MVVM architecture with prot
 
 ### Constants
 
-**StringConstants** - Centralized UI string constants
+**Strings** - Centralized UI string constants
 
 - Organizes all UI strings, error messages, and system image names
 - Categorized sections: Error messages, UI labels, search placeholders, navigation titles, currency codes, system images
